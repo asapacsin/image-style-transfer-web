@@ -1,0 +1,31 @@
+body{
+  background-color:black;
+  color:white;
+  padding:100px;
+}
+#display-image-content{
+    width: 400px;
+    height: 225px;
+    border: 1px solid white;
+    background-position: center;
+    background-size: cover;
+}
+#display-image-style{
+    width: 400px;
+    height: 225px;
+    border: 1px solid white;
+    background-position: center;
+    background-size: cover;
+}
+.input{
+  width:200px;
+}
+#image-display{
+  display:flex;
+}
+#image-display img:hover{
+  opacity:0.8;
+}
+.selected_image{
+  border:6px solid rgb(19, 111, 139);
+}

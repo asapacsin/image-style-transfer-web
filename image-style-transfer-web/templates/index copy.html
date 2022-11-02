@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Python Flask Upload and display image</title> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />   
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}" />         
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body">
+<p><h1 align="center">Python Flask Upload and style iamge</h1></p>
+<div class="container">
+<div class="row">
+    <h2>Select a file to upload</h2>
+    <form method="post" action="/" enctype="multipart/form-data">
+        <dl>
+            <p class="input">
+                content-file
+                <input id = "content_file" type="file" name="content-file" class="form-control" autocomplete="off" accept="image/jpg" required>
+                <div id ="display-image-content"></div>
+            </p>
+            <p class="input">
+                style-file
+                <div id="image-display">
+                    <img src="{{ url_for('static', filename='uploads/style/p1.jpg') }}">
+                    <img src="{{ url_for('static', filename='uploads/style/p2.jpg') }}">
+                </div>
+            </p>
+            <script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
+        </dl>
+        <p>
+            <input type="submit" value="Submit" class="btn btn-info">
+        </p>
+    </form>
+</div>
+</body>
+</html>
