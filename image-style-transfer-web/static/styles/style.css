@@ -1,11 +1,12 @@
 body{
   background-color:black;
   color:white;
+  width:1200px;
+  height:600px;
   padding:100px;
+  margin-bottom: 1200px;
 }
 #display-image-content{
-    width: 400px;
-    height: 225px;
     border: 1px solid white;
     background-position: center;
     background-size: cover;
@@ -22,10 +23,44 @@ body{
 }
 #image-display{
   display:flex;
+  width:400px;
+  height:225px;
 }
 #image-display img:hover{
   opacity:0.8;
 }
 .selected_image{
   border:6px solid rgb(19, 111, 139);
+}
+p,figcaption{
+  font-family:URW Chancery L, cursive;
+}
+figcaption{
+  border:1px solid;
+  padding:10px;
+  height:60px;
+}
+
+#display-image-content{
+  border: 1px solid black;
+  background-position: center;
+  background-size: cover;
+}
+input[type=file] {
+  display: block;
+  width: auto;
+}
+figure img{
+  width:400px;
+  height:225px;
+}
+#sliderBox{
+  margin-top:70px;
+}
+#display{
+  display:flex;
+}
+img{
+  width:400px;
+  height:225px;
 }

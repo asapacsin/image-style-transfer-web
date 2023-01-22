@@ -42,9 +42,8 @@ def run_style_transform(file_model_transfer,style_bottleneck, content_image):
     stylized_image = cv2.cvtColor(stylized_image, cv2.COLOR_RGB2BGR)
     stylized_image = cv2.resize(stylized_image,(im_W,im_H))
     return stylized_image
-def img_style_transform(content_image_name,style_image_name):
+def img_style_transform(content_path,content_image_name,style_image_name,style_degree):
     # 加载风格特征
-    content_path ='static/uploads/content/'+content_image_name+'.jpg'
     path_fea_style= 'static/uploads/style_model'
     path_img_style = "static/uploads/style"
     path_output = "static/uploads/output"
@@ -68,15 +67,15 @@ def img_style_transform(content_image_name,style_image_name):
     content_fea = run_style_predict(file_model_prediction,img)
     
     # 设置风格比例
-    ratio =80
+    ratio =int(float(style_degree*100))
     mix_fea = ratio*0.01*style_fea +(1-ratio*0.01)*content_fea
     
     print("start processing Style=%s ratio=%d%%"%(str_style,ratio))
     stylized_image = run_style_transform(file_model_transfer,mix_fea, img)
     print("processing end")
-    cv2.putText(stylized_image,'Style: %s ratio:%d'%(str_style,ratio),
-                                 (5,30),cv2.FONT_HERSHEY_SIMPLEX, 
-                                  0.8,(255,255,0),1,cv2.LINE_AA)
+    #cv2.putText(stylized_image,'Style: %s ratio:%d'%(str_style,ratio),
+                                 #(5,30),cv2.FONT_HERSHEY_SIMPLEX, 
+                                  #0.8,(255,255,0),1,cv2.LINE_AA)
     stylized_image_savepath = os.path.join(path_output,output_name)
     cv2.imwrite(stylized_image_savepath,stylized_image)
     #cv2.imshow('style', stylized_image)

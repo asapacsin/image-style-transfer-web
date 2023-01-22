@@ -5,6 +5,7 @@ import os
 from werkzeug.utils import secure_filename
 import collect_fea_style as cfs
 import img_style_transform as ist
+import time
 
 app = Flask(__name__)
  
@@ -30,6 +31,11 @@ def home():
  
 @app.route('/', methods=['POST'])
 def upload_image():
+    start = time.process_time()
+    print('get something')
+    style_degree= request.form.get('style_degree')
+    style_degree = float(style_degree)
+    print(style_degree)
     style_path = request.form.get('style_file')
     if 'content-file'not in request.files and style_path == "":
         flash('No file part')
@@ -42,7 +48,8 @@ def upload_image():
         style_pure_name = style_pure_name.split('.')[0]
         content_file.save(os.path.join(app.config['UPLOAD_FOLDER_content'], filename_content))
         cfs.style_model_train(style_pure_name)
-        ist.img_style_transform(content_pure_name,style_pure_name)
+        content_path ='static/uploads/content/'+filename_content
+        ist.img_style_transform(content_path,content_pure_name,style_pure_name,style_degree)
         #print('upload_image filename: ' + filename)
         flash('Image successfully uploaded and displayed below')
         content_path = app.config['UPLOAD_FOLDER_content']+ '/'+ filename_content
@@ -53,6 +60,8 @@ def upload_image():
             'style':style_path,
             'output' : output_path
         }
+        end = time.process_time()
+        print('the time cost is '+str(end-start)+'seconds')
         return render_template('success.html', **params)
     else:
         flash('Allowed image types are - png, jpg, jpeg, gif')
